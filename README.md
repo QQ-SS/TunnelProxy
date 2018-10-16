@@ -4,6 +4,8 @@
 
 ## Installation
 
+    cd path/to/your/source
+    git clone https://github.com/WangXQ-git/TunnelProxy.git
 
 ## Usage
 
