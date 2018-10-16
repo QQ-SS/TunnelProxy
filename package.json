@@ -1,0 +1,13 @@
+{
+  "name": "tunnelproxy",
+  "version": "0.0.0",
+  "description": "TunnelProxy",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "arguments": "^1.0.0",
+    "dateformat": "^3.0.3"
+  }
+}
