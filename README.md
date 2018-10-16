@@ -1,4 +1,4 @@
-﻿# ProxyTcp
+﻿# TunnelProxy
 
 反弹式Socket代理程序
 
@@ -23,7 +23,7 @@
 
 服务端用于提供TCP服务，需要与被访问服务器在同一内网中
 
-    node server.js -h IP/hostname -p 8080 -s "localhost:3389;127.0.0.1:3306;192.168.0.0.1:3389"
+    node server.js -h IP/hostname -p 8080 -s "localhost:3389;127.0.0.1:3306;192.168.0.1:3389"
 
 ### 客户端
 
