@@ -1,6 +1,6 @@
 'use strict';
 
-// 服务器端调用参数
+// 隧道端调用参数
 // node tunnel.js -p 8080
 //
 
@@ -29,7 +29,7 @@ const cmd = 'AT+'; //指令前缀，可自行修改成其它
 var Log = function () {
     var dateFormat = require('dateformat');
     var util = require('util');
-    var now = dateFormat(new Date(), '[yyyy-mm-dd hh:MM:ss]');
+    var now = dateFormat(new Date(), '[yyyy-mm-dd HH:MM:ss]');
     console.log(now + ' ' + util.format.apply(this, arguments));
 };
 

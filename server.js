@@ -55,7 +55,7 @@ const cmd = 'AT+'; //指令前缀，可自行修改成其它
 var Log = function () {
     var dateFormat = require('dateformat');
     var util = require('util');
-    var now = dateFormat(new Date(), '[yyyy-mm-dd hh:MM:ss]');
+    var now = dateFormat(new Date(), '[yyyy-mm-dd HH:MM:ss]');
     console.log(now + ' ' + util.format.apply(this, arguments));
 };
 
@@ -65,15 +65,34 @@ function main() {
         var net = require('net');
         var zlib = require('zlib');
         var util = require('util');
-
+        var timerHeartBeat = null;
         var loc = null;
         var dest = null;
+
+        //生成心跳定时
+        var doOpenHeartBeat = function () {
+            timerHeartBeat = setInterval(function () {
+                client.write(cmd + 'HEARTBEAT', 'utf8');
+            }, 10 * 1000);
+
+        };
+        //停止心跳检测
+        var doCloseHeartBeat = function () {
+            if (timerHeartBeat) {
+                clearInterval(timerHeartBeat);
+            }
+        };
+
+
         var doConnect = function (first) {
             loc = net.connect(
                 dest,
                 function () {
                     Log(util.format('%s:%d 连接成功', dest.host, dest.port));
                     if (first) client.write(cmd + 'CONNECT:OK', 'utf8');
+
+                    //停止心跳检测
+                    doCloseHeartBeat();
 
                     if (dest.compress) {
                         loc
@@ -162,6 +181,14 @@ function main() {
                         );
                         return;
                     }
+
+                    //注册成功
+                    if (data === cmd + 'REGISTER:OK') {
+                        //生成心跳定时
+                        doOpenHeartBeat();
+                        return;
+                    }
+
 
                     //客户端退出
                     if (data === cmd + 'CONNECT:CLOSE') {

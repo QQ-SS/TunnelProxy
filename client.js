@@ -1,6 +1,6 @@
 'use strict';
 
-// 调用参数
+// 客户端调用参数
 // node client.js -h localhost -p 8080 -t localhost:3389 -l 3399
 //
 
@@ -55,7 +55,7 @@ const compress = false; //是否启用压缩
 var Log = function () {
     var dateFormat = require('dateformat');
     var util = require('util');
-    var now = dateFormat(new Date(), '[yyyy-mm-dd hh:MM:ss]');
+    var now = dateFormat(new Date(), '[yyyy-mm-dd HH:MM:ss]');
     console.log(now + ' ' + util.format.apply(this, arguments));
 };
 
