@@ -157,12 +157,13 @@ function main() {
         //});
 
         client.on('error', function (err) {
-            Log('隧道服务端：%s:%d 连接失败 %s', host, port, err.code);
+            Log('隧道服务端：%s:%d 连接失败 %s', host, port, err.code ? err.code : err.message);
         });
 
         client.on('close', function () {
             Log('隧道服务端：%s:%d 连接已关闭', host, port);
 
+            doCloseHeartBeat();
             if (loc) loc.end();
             setTimeout(connect, 5000);
         });
